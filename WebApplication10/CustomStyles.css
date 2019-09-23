@@ -1,0 +1,67 @@
+﻿hr {
+    border: 2px solid red;
+}
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../fonts/glyphicons-halflings-regular.eot');
+    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
+
+.panel-title > a:before {
+    float: right !important;
+    font-family: FontAwesome;
+    content: "\f068";
+    padding-right: 5px;
+}
+
+.panel-title > a.collapsed:before {
+    float: right !important;
+    content: "\f067";
+}
+
+.panel-title > a:hover,
+.panel-title > a:active,
+.panel-title > a:focus {
+    text-decoration: none;
+}
+body {
+    background-color: #fff;
+}
+
+.card-header, .card-link, .card-link:hover {
+    background-color: #000;
+    text-align: left;
+    color: hotpink;
+}
+
+.card-body {
+    padding: 10px 10px;
+}
+
+.card {
+    width: 500px;
+}
+
+p {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    font-size: 20px;
+    color: white;
+    -webkit-animation: minus 0.5s;
+}
+
+@keyframes minus {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
+    display: none;
