@@ -141,6 +141,7 @@ using System.Web.UI.HtmlControls;
 using Newtonsoft.Json;
 using System.Web.Services;
 
+
 namespace WebApplication10
 {
 
@@ -158,9 +159,7 @@ namespace WebApplication10
                 //int totalRows = 0;
                 BindData();
                 //DatabindRepeater(0, gvSearchResults.PageSize, totalRows);
-
             }
-
         }
         private void BindData()
         {

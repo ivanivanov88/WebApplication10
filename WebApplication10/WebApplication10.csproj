@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
@@ -163,6 +166,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="SearchPageWithDynamicSQL.aspx" />
+    <Content Include="ViewSwitcher.ascx" />
     <Content Include="walnut_small.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -174,12 +178,21 @@
     <Compile Include="Aboutus.aspx.designer.cs">
       <DependentUpon>Aboutus.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="GenerateFrURL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="FoodHandler.ashx.cs">
       <DependentUpon>FoodHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.designer.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Sitemap.ashx.cs">
       <DependentUpon>Sitemap.ashx</DependentUpon>
@@ -213,6 +226,13 @@
     <Compile Include="Termsandconditions.aspx.designer.cs">
       <DependentUpon>Termsandconditions.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ViewSwitcher.ascx.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.designer.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -227,6 +247,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Site.Mobile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

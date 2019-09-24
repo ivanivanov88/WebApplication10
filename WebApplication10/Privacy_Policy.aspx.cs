@@ -11,7 +11,7 @@ namespace WebApplication10
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            MetaDescription = "This page is about our privacy policy;";
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductDetails.aspx.cs" Inherits="WebApplication10.ProductDetails" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductDetails.aspx.cs" Inherits="WebApplication10.ProductDetails" Title="" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Product Details</title>
+   <%-- <title>Product Details for :<asp:Label ID ="Label155" runat ="server"></asp:Label> </title>--%>
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>

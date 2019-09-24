@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Web.UI.HtmlControls;
 using System.Windows.Input;
+using Microsoft.AspNet.FriendlyUrls;
 namespace WebApplication10
 {
 
@@ -17,6 +18,15 @@ namespace WebApplication10
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            var segments = Request.GetFriendlyUrlSegments();
+            if (segments.Any())
+            {
+                //ID.Text = "ID: " + segments[0];
+                //Headline.Text = "Headline: " + segments[1];
+                //Link.Text = Link.NavigateUrl = FriendlyUrl.Href("~/ProductDetails", segments[0], segments[1]);
+            }
+        
             if (!IsPostBack)
             {
                 string productId = Request.QueryString["NDB_No"];
@@ -775,9 +785,10 @@ namespace WebApplication10
                         if (rdc["Long_Desc"] != null && rdc["Long_Desc"] != DBNull.Value)
                         {
                             Label150.Text = rdc["Long_Desc"].ToString(); //Starch
-
+                            Page.Title = "Details for :" + Label150.Text;
+                            MetaDescription ="This page shows the details of the nutritional value for :" + Label150.Text;
                         }
-                        else { Label50.Text = "No Measurement"; }
+                        else { Label150.Text = "No Measurement"; }
                         //if (rdc["Long_Desc"] != null && rdc["Long_Desc"] != DBNull.Value)
                         //{
                         //    Label151.Text = rdc["Long_Desc"].ToString(); //Starch
@@ -788,7 +799,13 @@ namespace WebApplication10
                             Label152.Text = rdc["Long_Desc"].ToString(); //Starch
                            
                         }
-                        else { Label52.Text = "No Measurement"; }
+                        else { Label152.Text = "No Measurement"; }
+                        //if (rdc["Long_Desc"] != null && rdc["Long_Desc"] != DBNull.Value)
+                        //{
+                        //    Label155.Text = rdc["Long_Desc"].ToString(); //Starch
+
+                        //}
+                        //else { Label55.Text = "No Measurement"; }
                     }
                         
                     }

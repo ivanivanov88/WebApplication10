@@ -13,8 +13,8 @@ namespace WebApplication10
         {
             //RouteConfig.RegisterRoutes(RouteTable.Routes);
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            
 
+            MyRouteConfig.RegisterRoutes(RouteTable.Routes);
 
 
         }
