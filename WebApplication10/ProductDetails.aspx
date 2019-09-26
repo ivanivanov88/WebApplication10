@@ -1,6 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductDetails.aspx.cs" Inherits="WebApplication10.ProductDetails" Title="" %>
 <!DOCTYPE html>
-
+<%@ Import Namespace="Microsoft.AspNet.FriendlyUrls" %>
+<% foreach (var segment in Request.GetFriendlyUrlSegments()) { %>
+    <li><%: segment %></li>
+<% } %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
    <%-- <title>Product Details for :<asp:Label ID ="Label155" runat ="server"></asp:Label> </title>--%>
@@ -33,6 +36,7 @@
     <div class="col-auto">     
     <div class="container">        
   <h1 class="text-white align-content-center bg-primary">Nutritional value for <asp:Label ID ="Label152" runat ="server"></asp:Label>  </h1>
+
   <hr />
   <form>
   <div class="form-group">

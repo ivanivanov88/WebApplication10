@@ -150,7 +150,7 @@ namespace WebApplication10
         [WebMethod(EnableSession = true)]
         protected void Page_Load(object food, EventArgs a)
         {
-
+            MetaDescription = "A website dedicated to being a  nutritional database and a friendly interface with huge details about all kinds of foods, fruits, vegetables, ingredients, commercial foods, beverages, and drinks";
             if (!IsPostBack)
             {
                 checkbox2.Checked = false;
@@ -159,6 +159,7 @@ namespace WebApplication10
                 //int totalRows = 0;
                 BindData();
                 //DatabindRepeater(0, gvSearchResults.PageSize, totalRows);
+             
             }
         }
         private void BindData()
@@ -186,15 +187,13 @@ namespace WebApplication10
         {
 
             Response.Redirect("ProductDetails.aspx?NDB_No=" + e.CommandArgument.ToString());
-
+            Session["NDB_No"] = e.CommandArgument.ToString();
             Session["id"] = 1;
         }
         public string StringA { get; set; }
 
         public void Check_Clicked(object check, EventArgs c)
         {
-
-
             if (checkbox2.Checked && ListBox1.GetSelectedIndices().Count() == 0)
             {
                 StringA = "Search4";

@@ -3,14 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Text;
-
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+using System.Web.UI;
 namespace WebApplication10
 {
     public static class GenerateFrURL
     {
-      
-            public static string GetFriendlyTitle(string title, bool remapToAscii = false, int maxlength = 80)
-            {
+
+        public static string GetFriendlyTitle(string title, bool remapToAscii = false, int maxlength = 80)
+        {
+            //title = Session["NDB_No"] as string;
+            //string cs = ConfigurationManager.ConnectionStrings["connectionStr"].ConnectionString;
+            //using (SqlConnection con = new SqlConnection(cs))
+            //{
+            //    SqlCommand cmd = new SqlCommand("spGetProductDetailsByID", con);
+            //    cmd.CommandType = CommandType.StoredProcedure;
+            //    SqlParameter parameter = new SqlParameter("@ID", title);
+            //    cmd.Parameters.Add(parameter);
+            //    con.Open();
+
+            //    using (SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+            //    {
+            //        while (rdr.Read())
+            //        {
+            //            if (rdr["Long_Desc"] != null && rdr["Long_Desc"] != DBNull.Value)
+            //            {
+            //                Label1.Text = rdr["Long_Desc"].ToString();
+            //                string a = Label1.Text;
+            //            }
+            //            else { Label1.Text = "No Measurement"; }
+            //        }
+            //    }
+            //} 
                 if (title == null)
                 {
                     return string.Empty;

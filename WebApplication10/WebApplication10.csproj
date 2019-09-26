@@ -165,7 +165,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="SearchPageWithDynamicSQL.aspx" />
+    <Content Include="Home.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="walnut_small.ico" />
     <Content Include="Web.config" />
@@ -212,12 +212,12 @@
       <DependentUpon>ProductDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchPageWithDynamicSQL.aspx.cs">
-      <DependentUpon>SearchPageWithDynamicSQL.aspx</DependentUpon>
+    <Compile Include="Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SearchPageWithDynamicSQL.aspx.designer.cs">
-      <DependentUpon>SearchPageWithDynamicSQL.aspx</DependentUpon>
+    <Compile Include="Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Termsandconditions.aspx.cs">
       <DependentUpon>Termsandconditions.aspx</DependentUpon>

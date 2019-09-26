@@ -1,5 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SearchPageWithDynamicSQL.aspx.cs" Inherits="WebApplication10.SearchPageWithDynamicSQL" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="WebApplication10.SearchPageWithDynamicSQL" %>
+<%@ Import Namespace="Microsoft.AspNet.FriendlyUrls" %>
+<% foreach (var segment in Request.GetFriendlyUrlSegments()) { %>
+    <li><%: segment %></li>
+<% } %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -87,6 +90,7 @@
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="cookie.js"></script>
     <link href="cookie_note.css" rel="stylesheet" />   
+   
     <link rel="shortcut icon" href="~/walnut_small.ico" type ="image/x-icon" />
 </head>
 <body style="padding-top: 10px">
