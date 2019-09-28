@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
 
+
+
+
+
 namespace WebApplication10
 {
     public class WebApiApplication : System.Web.HttpApplication
@@ -15,8 +19,24 @@ namespace WebApplication10
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
             MyRouteConfig.RegisterRoutes(RouteTable.Routes);
+            // Add Routes.
+            RegisterCustomRoutes(RouteTable.Routes);
+        }
+
+        void RegisterCustomRoutes(RouteCollection routes)
+        {
+           
+            routes.MapPageRoute(
+                "ProductByNameRoute",
+                "{NDB_No}/{Slug_Name}",
+                "~/ProductDetails.aspx"
+            );
+        
+    
 
 
+}
+    
         }
     }
-}
+

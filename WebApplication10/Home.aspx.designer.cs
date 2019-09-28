@@ -10,7 +10,7 @@
 namespace WebApplication10 {
     
     
-    public partial class SearchPageWithDynamicSQL {
+    public partial class Home {
         
         /// <summary>
         /// form1 control.

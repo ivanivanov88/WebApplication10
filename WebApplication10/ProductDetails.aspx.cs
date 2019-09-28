@@ -18,21 +18,14 @@ namespace WebApplication10
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            var segments = Request.GetFriendlyUrlSegments();
-            if (segments.Any())
-            {
-                //ID.Text = "ID: " + segments[0];
-                //Headline.Text = "Headline: " + segments[1];
-                //Link.Text = Link.NavigateUrl = FriendlyUrl.Href("~/ProductDetails", segments[0], segments[1]);
-            }
-        
+                         
             if (!IsPostBack)
             {
-                string productId = Request.QueryString["NDB_No"];
+                string productId = Page.RouteData.Values["NDB_No"] as string;
+                //string productId = Request.QueryString["NDB_No"];
                 if (productId == null)
                 {
-                    Response.Redirect("SearchPageWithDynamicSQL.aspx");
+                    Response.Redirect("Home.aspx");
                 }
                 string cs = ConfigurationManager.ConnectionStrings["connectionStr"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(cs))

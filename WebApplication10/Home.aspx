@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="WebApplication10.SearchPageWithDynamicSQL" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="WebApplication10.Home" %>
 <%@ Import Namespace="Microsoft.AspNet.FriendlyUrls" %>
 <% foreach (var segment in Request.GetFriendlyUrlSegments()) { %>
     <li><%: segment %></li>
@@ -191,7 +191,7 @@
                             <Columns>
                                <asp:TemplateField   HeaderText="Name">
                                 <ItemTemplate>
-                                   <asp:LinkButton ID="LinkButton1" runat="server" OnCommand ="LinkButton1_Click"  Text='<%#Eval("Long_Desc") %>' CommandArgument ='<%#Eval("NDB_No") %>'  >LinkButton</asp:LinkButton>
+                                   <asp:HyperLink ID="LinkButton1" runat="server"  Text='<%#Eval("Long_Desc") %>' NavigateUrl='<%# GetRouteUrl("ProductByNameRoute",new System.Web.Routing.RouteValueDictionary { { "NDB_No", Eval("NDB_No") }, { "Slug_Name", Eval("Slug_Name") } })%>' >LinkButton</asp:HyperLink>
                                </ItemTemplate>
                              </asp:TemplateField>   
                                 <asp:TemplateField HeaderText = "Value of nutrient (in 100g)">

@@ -140,12 +140,12 @@ using System.Text;
 using System.Web.UI.HtmlControls;
 using Newtonsoft.Json;
 using System.Web.Services;
-
+using Microsoft.AspNet.FriendlyUrls;
 
 namespace WebApplication10
 {
 
-    public partial class SearchPageWithDynamicSQL : System.Web.UI.Page
+    public partial class Home : System.Web.UI.Page
     {
         [WebMethod(EnableSession = true)]
         protected void Page_Load(object food, EventArgs a)
@@ -158,8 +158,16 @@ namespace WebApplication10
                 Session["param"] = "";
                 //int totalRows = 0;
                 BindData();
-                //DatabindRepeater(0, gvSearchResults.PageSize, totalRows);
-             
+                //DatabindRepeater(0, gvSearchResults.PageSize, totalRows);             
+                //var segments = Request.GetFriendlyUrlSegments();
+                //if (segments.Any())
+                //{
+                //    NDB_No.Text = "ID: " + segments[0];
+                //    Headline.Text = "Headline: " + segments[1];
+                //    Link.Text = Link.NavigateUrl = FriendlyUrl.Href("~/article", segments[0], segments[1]);
+                //}
+
+
             }
         }
         private void BindData()
@@ -183,13 +191,141 @@ namespace WebApplication10
                 con.Close();
             }
         }
-        protected void LinkButton1_Click(object sender, CommandEventArgs e)
-        {
+        //public static string RemapInternationalCharToAscii(char c)
+        //{
+        //    string s = c.ToString().ToLowerInvariant();
+        //    if ("àåáâäãåą".Contains(s))
+        //    {
+        //        return "a";
+        //    }
+        //    else if ("èéêëę".Contains(s))
+        //    {
+        //        return "e";
+        //    }
+        //    else if ("ìíîïı".Contains(s))
+        //    {
+        //        return "i";
+        //    }
+        //    else if ("òóôõöøőð".Contains(s))
+        //    {
+        //        return "o";
+        //    }
+        //    else if ("ùúûüŭů".Contains(s))
+        //    {
+        //        return "u";
+        //    }
+        //    else if ("çćčĉ".Contains(s))
+        //    {
+        //        return "c";
+        //    }
+        //    else if ("żźž".Contains(s))
+        //    {
+        //        return "z";
+        //    }
+        //    else if ("śşšŝ".Contains(s))
+        //    {
+        //        return "s";
+        //    }
+        //    else if ("ñń".Contains(s))
+        //    {
+        //        return "n";
+        //    }
+        //    else if ("ýÿ".Contains(s))
+        //    {
+        //        return "y";
+        //    }
+        //    else if ("ğĝ".Contains(s))
+        //    {
+        //        return "g";
+        //    }
+        //    else if (c == 'ř')
+        //    {
+        //        return "r";
+        //    }
+        //    else if (c == 'ł')
+        //    {
+        //        return "l";
+        //    }
+        //    else if (c == 'đ')
+        //    {
+        //        return "d";
+        //    }
+        //    else if (c == 'ß')
+        //    {
+        //        return "ss";
+        //    }
+        //    else if (c == 'Þ')
+        //    {
+        //        return "th";
+        //    }
+        //    else if (c == 'ĥ')
+        //    {
+        //        return "h";
+        //    }
+        //    else if (c == 'ĵ')
+        //    {
+        //        return "j";
+        //    }
+        //    else
+        //    {
+        //        return "";
+        //    }
+        //}
+        //public static string URLFriendly(string title)
+        //{
+        //    if (title == null) return "";
 
-            Response.Redirect("ProductDetails.aspx?NDB_No=" + e.CommandArgument.ToString());
-            Session["NDB_No"] = e.CommandArgument.ToString();
-            Session["id"] = 1;
-        }
+        //    const int maxlen = 80;
+        //    int len = title.Length;
+        //    bool prevdash = false;
+        //    var sb = new StringBuilder(len);
+        //    char c;
+
+        //    for (int i = 0; i < len; i++)
+        //    {
+        //        c = title[i];
+        //        if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
+        //        {
+        //            sb.Append(c);
+        //            prevdash = false;
+        //        }
+        //        else if (c >= 'A' && c <= 'Z')
+        //        {
+        //            // tricky way to convert to lowercase
+        //            sb.Append((char)(c | 32));
+        //            prevdash = false;
+        //        }
+        //        else if (c == ' ' || c == ',' || c == '.' || c == '/' ||
+        //            c == '\\' || c == '-' || c == '_' || c == '=')
+        //        {
+        //            if (!prevdash && sb.Length > 0)
+        //            {
+        //                sb.Append('-');
+        //                prevdash = true;
+        //            }
+        //        }
+        //        else if ((int)c >= 128)
+        //        {
+        //            int prevlen = sb.Length;
+        //            sb.Append(RemapInternationalCharToAscii(c));
+        //            if (prevlen != sb.Length) prevdash = false;
+        //        }
+        //        if (i == maxlen) break;
+        //    }
+
+        //    if (prevdash)
+        //        return sb.ToString().Substring(0, sb.Length - 1);
+        //    else
+        //        return sb.ToString();
+        //}
+
+        //protected void LinkButton1_Click(object sender, CommandEventArgs e)
+        //{
+
+        //    Response.Redirect("ProductDetails.aspx?NDB_No=" + e.CommandArgument.ToString());
+            
+        //    Session["id"] = 1;
+        //}
         public string StringA { get; set; }
 
         public void Check_Clicked(object check, EventArgs c)
@@ -329,7 +465,7 @@ namespace WebApplication10
         {
             if (inputLong_Desc.Value.Length == 0)
             {
-                Response.Redirect("SearchPageWithDynamicSQL.aspx");
+                Response.Redirect("Home.aspx");
             }
             else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false)
             {
