@@ -28,7 +28,7 @@ namespace WebApplication10
            
             routes.MapPageRoute(
                 "ProductByNameRoute",
-                "{NDB_No}/{Slug_Name}",
+                "Products/{NDB_No}/{Slug_Name}",
                 "~/ProductDetails.aspx"
             );
         

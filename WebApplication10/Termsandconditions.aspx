@@ -35,7 +35,7 @@
     <div class="container">   
         <div class ="container">
             <div class="row">
-         <a href="SearchPageWithDynamicSQL.aspx" class="btn btn-primary btn-sm active pull-right " role="button" aria-pressed="true">Got back to main page.</a>
+         <a href="Home.aspx" class="btn btn-primary btn-sm active pull-right " role="button" aria-pressed="true">Got back to main page.</a>
         <span class="btn-separator"></span>
           <a href="Privacy_Policy.aspx" class="btn btn-primary btn-sm active pull-right " role="button" aria-disabled="true">Privacy Policy.</a>
         </div>

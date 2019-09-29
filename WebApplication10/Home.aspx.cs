@@ -15,7 +15,7 @@
 //namespace WebApplication10
 //{
 
-//    public partial class SearchPageWithDynamicSQL : System.Web.UI.Page
+//    public partial class Home : System.Web.UI.Page
 //    {
 //        [WebMethod(EnableSession = true)]
 //        protected void Page_Load(object food, EventArgs a)
@@ -101,7 +101,7 @@
 //        {
 //            if (inputLong_Desc.Value.Length == 0)
 //            {
-//                Response.Redirect("SearchPageWithDynamicSQL.aspx");
+//                Response.Redirect("Home.aspx");
 //            }             
 //            string connectionStr = ConfigurationManager
 //                    .ConnectionStrings["connectionStr"].ConnectionString;
@@ -389,7 +389,7 @@ namespace WebApplication10
 
             if (inputLong_Desc.Value.Length == 0)
             {
-                Response.Redirect("SearchPageWithDynamicSQL.aspx");
+                Response.Redirect("Home.aspx");
             }
             else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false)
             {

@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="WebApplication10.Home" %>
-<%@ Import Namespace="Microsoft.AspNet.FriendlyUrls" %>
+<%--<%@ Import Namespace="Microsoft.AspNet.FriendlyUrls" %>
 <% foreach (var segment in Request.GetFriendlyUrlSegments()) { %>
     <li><%: segment %></li>
-<% } %>
+<% } %>--%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">

@@ -62,7 +62,7 @@
            
         <div class ="container  justify-content-center " style =" position: relative; left:370px">
             <div class="row">
-         <a href="SearchPageWithDynamicSQL.aspx" class="btn btn-primary btn-sm active pull-right " role="button" aria-pressed="true">Got back to main page.</a>
+         <a href="Home.aspx" class="btn btn-primary btn-sm active pull-right " role="button" aria-pressed="true">Got back to main page.</a>
                    <span class="btn-separator"></span>
           <a href="Termsandconditions.aspx" class="btn btn-primary btn-sm active pull-right " role="button" aria-disabled="true">Terms and conditions.</a>
                   </div>

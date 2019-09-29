@@ -13,7 +13,7 @@ namespace WebApplication10
             var settings = new FriendlyUrlSettings();
             settings.AutoRedirectMode = RedirectMode.Permanent;
             routes.EnableFriendlyUrls(settings);
-            routes.MapPageRoute("", "test/{id}", "~/ProductDetails.aspx");
+            //routes.MapPageRoute("", "test/{id}", "~/ProductDetails.aspx");
          
         }
 

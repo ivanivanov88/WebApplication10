@@ -1,9 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProductDetails.aspx.cs" Inherits="WebApplication10.ProductDetails" Title="" %>
 <!DOCTYPE html>
-<%@ Import Namespace="Microsoft.AspNet.FriendlyUrls" %>
+<%--<%@ Import Namespace="Microsoft.AspNet.FriendlyUrls" %>
 <% foreach (var segment in Request.GetFriendlyUrlSegments()) { %>
     <li><%: segment %></li>
-<% } %>
+<% } %>--%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
    <%-- <title>Product Details for :<asp:Label ID ="Label155" runat ="server"></asp:Label> </title>--%>
@@ -16,7 +16,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="multiply.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css"/>
 <link rel="shortcut icon" href="~/walnut_small.ico" type ="image/x-icon" />
 <style>
@@ -42,7 +41,7 @@
   <div class="form-group">
     <label for="exampleInputEmail1">Ammount calculated for in (g) :</label>
       <div class="mx-sm-3">
-      <a><input type="text" class="form-control" id="ammounting" aria-describedby="ammountingg" placeholder="Enter ammount in grams." style="width:200px;position:relative;left:230px;bottom:40px">
+      <a><input type="text" class="form-control" id="ammounting" aria-describedby="ammountingg" placeholder="Enter ammount in grams." style="width:200px;position:relative;left:230px;bottom:40px"/></a>
           </div>
     <small id="emailHelp" class="form-text text-muted" style="position:relative;bottom:40px;">Every value of the nutrients will change depending on the ammount of grams you input (default is 100g).</small>
     <button type="button" class="btn btn-primary mb-2" onclick="multiplyBy()" value="Multiply"style="position:relative;bottom:103px;left:450px;">Submit</button>
@@ -138,7 +137,7 @@
         <tr class="toggler">
             <th scope="row" class="auto-style1">Total Lipids</th>
             <td class="auto-style11"><asp:Label ID ="Label4" runat ="server"></asp:Label> (g)</td>
-           <td class="auto-style11"><span id = "result3"></span> (g)</td>  
+            <td class="auto-style11"><span id = "result3"></span> (g)</td>  
             <td class="auto-style3">44-77 g</td>
       
         </tr>
@@ -504,8 +503,8 @@
         </tr>    
          <tr>
             <th scope="row"  class="auto-style3">Vitamin E</th>
-            <td class="auto-style13"><asp:Label ID ="Label40" runat ="server"></asp:Label></td>   
-               <td class="auto-style11"><span id = "result51"></span></td>  
+            <td class="auto-style13"><asp:Label ID ="Label40" runat ="server"></asp:Label> (mg)</td>   
+               <td class="auto-style11"><span id = "result51"></span> (mg)</td>  
              <td class="auto-style3">15 mg</td>
         </tr>
           <tr>
@@ -1103,5 +1102,6 @@
             $(this).css('height', 'auto');
         });
     </script>
+    <script src="multiply.js"></script>
 </body>
 </html>

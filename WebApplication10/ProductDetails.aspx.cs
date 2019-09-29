@@ -280,10 +280,10 @@ namespace WebApplication10
                     }
                 }
             }
-            string productIb = Request.QueryString["NDB_No"];
+            string productIb = Page.RouteData.Values["NDB_No"] as string;
             if (productIb == null)
             {
-                Response.Redirect("SearchPageWithDynamicSQL.aspx");
+                Response.Redirect("Home.aspx");
             }
             string cz = ConfigurationManager.ConnectionStrings["connectionStr2"].ConnectionString;
             using (SqlConnection con = new SqlConnection(cz))
@@ -756,11 +756,11 @@ namespace WebApplication10
                     }
                 }
                 con.Close();
-            }              
-                string productIc = Request.QueryString["NDB_No"];
-                if (productIc == null)
+            }
+            string productIc = Page.RouteData.Values["NDB_No"] as string;
+            if (productIc == null)
                 {
-                    Response.Redirect("SearchPageWithDynamicSQL.aspx");
+                    Response.Redirect("Home.aspx");
                 }
                 string cc = ConfigurationManager.ConnectionStrings["connectionStr"].ConnectionString;
                 using (SqlConnection coc = new SqlConnection(cc))
