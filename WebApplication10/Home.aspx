@@ -1,17 +1,175 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="WebApplication10.Home" %>
-<%--<%@ Import Namespace="Microsoft.AspNet.FriendlyUrls" %>
-<% foreach (var segment in Request.GetFriendlyUrlSegments()) { %>
-    <li><%: segment %></li>
-<% } %>--%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Nutrient Search</title>
     <script src="Scripts/jquery-3.4.1.js"></script>
     <script src="jquery-ui.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="http://malsup.github.io/jquery.blockUI.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnSearch').click(function () {
+                $('.blockMe').block({
+                    message: 'Please wait...<br /><img src="Images/loadingBar.gif" />',
+                    css: { padding: '10px' }
+                });
+            });
+        });
+</script>
     <link href="jquery-ui.css" rel="stylesheet" />
-  
+    <link href="appleRotation.css" rel="stylesheet" />
     <style type="text/css">
+   .ImageButton { position:relative;font: 41px arial, sans-serif; height: 50px; width: 150px; overflow:hidden; border-radius: 25px; border: 1px solid #000000;background-image:url('FoodButtonSmaller2Adjusted.jpg'); background-size: 1555% 100%;
+    -webkit-animation-name: MOVE-BG4; color: rgba(0, 0, 0, 0.6);
+	-webkit-animation-duration: 260s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;   
+        }
+          select > option:hover {
+    background-color:  #a9adaa;
+  }
+ .ImageButton:hover{-webkit-animation-name: MOVE-BG2;}
+ .ImageButton:active{-webkit-animation-name: MOVE-BG3;}
+ .NutreintBtn {
+            position: relative;
+            font: 25px arial, sans-serif;
+            white-space: normal;
+            line-height:20px;
+            height: 50px;
+            width: 150px;
+            overflow: hidden;
+            border-radius: 25px;
+            border: 1px solid #000000;
+            background-image: url('Nutrient Button2Adjusted.jpg');
+            background-size: 600% 100%;
+            -webkit-animation-name: MOVE-BG;
+            color: rgba(0, 0, 0, 0.6);
+            -webkit-animation-duration: 100s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+        }
+ .NutreintBtn:hover{-webkit-animation-name: MOVE-BG2;}
+ .NutreintBtn:active{-webkit-animation-name: MOVE-BG3;}
+  .CategoryBtn {
+            position: relative;
+            font: 25px arial, sans-serif;
+            height: 50px;
+            white-space: normal;
+            line-height:20px;
+            width: 150px;
+            overflow: hidden;
+            border-radius: 25px;
+            border: 1px solid #000000;
+            background-image: url('FoodCategoryButtonAdjusted.jpg');
+            background-size: 600% 100%;
+            -webkit-animation-name: MOVE-BG;
+            color: rgba(0, 0, 0, 0.6);
+            -webkit-animation-duration: 100s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+        }
+ .CategoryBtn:hover{-webkit-animation-name: MOVE-BG2;}
+ .CategoryBtn:active{-webkit-animation-name: MOVE-BG3;}
+        @-webkit-keyframes MOVE-BG {
+	from {
+		background-position: 0% 0%
+	}
+	to { 
+		background-position: 187% 0%
+	}
+}
+              @-webkit-keyframes MOVE-BG4 {
+	from {
+		background-position: 0% 0%
+	}
+	to { 
+		background-position: 287% 0%
+	}
+}
+                @-webkit-keyframes MOVE-BG2 {
+	from {
+		background-position: -10% 0%
+	}
+	to { 
+		background-position: -187% 0%
+	}
+}
+     @-webkit-keyframes MOVE-BG3 {
+	from {
+		background-size: -10% -100%;
+        background-position: -1110% 0%
+	}
+	to { 
+		background-size: 118700% 1100%;
+        background-position: -11180% 0%
+	}
+}
+        .submit {
+        height: 36px;
+        width: 36px;
+        border: 1px solid #ffffff;
+        border-radius: 5px;
+        position:relative;
+        overflow: hidden;
+        left:4px;
+        background-size: 150% 150%;
+        background: url('CancleButton.png') no-repeat;
+
+        vertical-align:middle
+    }
+        .submit:hover{
+             background: url('CancleButton.png') no-repeat #ff5b08;
+        }
+     .TextBoxCss {
+        font: 20px arial, sans-serif;
+         border:0;
+         width:100px;
+         text-align: center;
+         position:relative;   
+         left:3px;
+         border-radius:4px;
+         bottom:13px;
+         overflow: hidden;
+         background:#d7d7d7;
+         vertical-align:middle
+     }
+     .wrapper {
+         overflow: hidden;
+         height:37px;
+         width:150px;
+    border:1px solid #808080;
+    border-radius:10px;
+    display:inline-block;
+    z-index:11;
+}
+     .sprite1 {
+    width: 256px;
+    height: 256px;
+    background-image: url("spritesheet.png");
+    animation: playX 0.5s steps(3) infinite, playY 1.5s steps(3) infinite;
+}
+
+@keyframes playX {
+    from {
+        background-position-x: 0px;
+    }
+
+    to {
+        background-position-x: -798px;
+    }
+}
+
+@keyframes playY {
+    from {
+        background-position-y: 0px;
+    }
+
+    to {
+        background-position-y: -798px;
+    }
+}
+
         .image
         {
             float: left;
@@ -84,6 +242,15 @@
                         div.style.display = "block";
                     }
                 }
+                function showhide2() {
+                    var div = document.getElementById("hiddenlist2");
+                    if (div.style.display !== "none") {
+                        div.style.display = "none";
+                    }
+                    else {
+                        div.style.display = "block";
+                    }
+                }
     </script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <link rel="stylesheet"
@@ -94,15 +261,7 @@
     <link rel="shortcut icon" href="~/walnut_small.ico" type ="image/x-icon" />
 </head>
 <body style="padding-top: 10px">
-   <%-- <div class="alert alert-dismissible text-center cookiealert" role="alert">
-  <div class="cookiealert-container">
-    <b>Hello and welcome to our website.We know cookies are unhealthy,but</b> &#x1F36A; We use cookies to ensure you get the best experience on our website. <a href="http://cookiesandyou.com/" target="_blank">Learn more</a>
-
-    <button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close">
-        I agree
-    </button>
-  </div>
-</div>--%>
+    <div id="sprite" class="sprite1"></div>
    <div style ="height: 75px; position:fixed; bottom:150px;z-index:20" class="sticky top" id="cookie_directive_container">
       <ul>
         <li id="cookie_note">To provide the best user experience, this website stores <a href="http://www.allaboutcookies.org/cookies/" target="_blank">  <i class="fa fa-external-link" aria-hidden="true"></i>cookies</a> on your browser.By clicking "I understand and accept" or by continuing to use the site,<br /> you agree to this use of cookies and data.</li>
@@ -111,7 +270,7 @@
         <li id="cookies_used"><a href="Privacy_Policy.aspx"> <i class="fa fa-external-link" aria-hidden="true"></i>Privacy Policy.</a></li>
    </ul>
 </div>
- 
+<div id="wrapper" style="margin-left:auto;margin-right:20%;width:1580px;">
 <nav class="navbar navbar-default" style="z-index:1;width:auto;">
   <div class="container-fluid"style="width:auto">
     <div class="navbar-header">
@@ -135,6 +294,7 @@
       </div>            
   </div>
 </section>
+
     <div class="col-xs-8 col-xs-offset-2" style="position:relative;bottom:100px;">
         <form id="form1" runat="server" class="form-horizontal">
             <div class="panel panel-primary" style="width:120%;border-color:black;">
@@ -142,27 +302,49 @@
                     <h3>Nutrients Search</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group">
+                    <div class="form-group" style="position:relative;right:45px;">
                         <label for="inputLong_Desc" class="control-label col-xs-2">
                             Enter Food Name
                         </label>                  
-                        <div class="col-xs-7">
+                        <div class="col-xs-7" style="width:500px">
                             <input type="text" runat="server" class="form-control"
                                 id="inputLong_Desc" placeholder="Search for food" />
                         </div>
-                            <asp:Button ID="btnSearch" runat="server" Text="Search"
-                                CssClass="btn btn-primary" OnClick="BtnSearch_Click" style="margin-left: 0" /> 
-                          <button type="button" id="Button2" class="btn btn-secondary mb-2"style="position:relative;" onclick="showhide()">Filter</button>  
-                          <asp:Button ID ="btnClear" runat="server" Text="Clear Filter" CssClass="btn btn-secondary mb-2" OnClick="ClearFilter" />
-            <div class="container" id ="hiddenlist" style="display:none;border:1px solid #0094ff;border-radius:25px;position:absolute;margin-left:70%; width:300px;height:160px;background:white"> 
+                        <div >
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" class="ImageButton" ClientIDMode="Static"
+                                OnClick="BtnSearch_Click" style="margin-left: 0" /> 
+                            </div>
+                       
+                        <div class="container" id ="hiddenlist2" style="display:none;border:1px solid #0094ff;border-radius:25px;background:white; position:absolute;left:1048px;width:300px;height:160px;top:49px; background:white">
+                        <label style="position:relative;top:2px;" for="ListBox2">Order by category:</label>
+                        <asp:ListBox ID="Listbox2"  runat="server" CssClass="checkbox-inline" AutoPostBack="True" style="position:absolute;top:25px;right:20px" SelectionMode="Single" Rows="7" OnSelectedIndexChanged="Dropdown_SelectedIndexChanged" >
+                        </asp:ListBox>
+                            
+                       </div>
+                        <div  style="position:absolute;left:880px;width:160px;top:2px;"  >
+                          <button type="button" class="NutreintBtn" id="Button2" style="position:relative;" onclick="showhide()">Order by Nutrient:</button>  
+                           <div runat="server" class ="wrapper" id="OrderDiv">
+                           <asp:TextBox class="Textbox1" ID="TextBoxList" runat="server"  ReadOnly="true" CssClass="TextBoxCss" />
+                           <asp:Button ID ="btnClear" runat="server"  class="submit" OnClick="ClearFilter" />
+                        </div>
+                        </div>
+                         <div style="position:absolute;left:1050px;top:2px" >
+                          <button type="button" class="CategoryBtn" id="button3" style="position:relative;" onclick="showhide2()">Filter by category:</button>  
+                             <div  runat="server" id="CategoryDiv"  class ="wrapper">
+                             <asp:TextBox class="Textbox2" ID="TextBox2" runat="server"  ReadOnly="true" CssClass="TextBoxCss" />
+                          <asp:Button ID ="btnClear2" runat="server" CssClass="submit" OnClick="ClearFilter2" />
+                        </div>
+                      </div>
+                   <div class="container" id ="hiddenlist" style="display:none;border:1px solid #0094ff;border-radius:25px;position:absolute;margin-left:61%; width:300px;height:160px;background:white"> 
                    <label for="ListBox1">Order by ammount of:</label>
-                   <asp:ListBox ID="ListBox1" runat="server" CssClass="checkbox-inline" SelectionMode="Single" style="position:absolute;top:25px;right:20px" Rows="7" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged"></asp:ListBox>
-            </div>
-                               <div class="container" style="position:relative;top: 20px;width:500px; margin-left:10%" id="checkboxy">      
-                                       <asp:HiddenField ID="checkboxhidden" runat="server"/>
+                   <asp:ListBox ID="ListBox1" runat="server" CssClass="checkbox-inline" AutoPostBack="True" SelectionMode="Single" style="position:absolute;top:25px;right:20px" Rows="7" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged">             
+                   </asp:ListBox>
+                  </div>
+                   <div class="container" style="position:relative;top: 20px;width:500px; margin-left:10%" id="checkboxy">      
+                                   <asp:HiddenField ID="checkboxhidden" runat="server"/>
                                    <div class ="container" style="width:500px;position:relative;margin-right:80%;">
-                                   <asp:CheckBox id="checkbox2" runat="server" AutoPostBack="True" Text=" Search only basic foods and ingredients." TextAlign="Right" OnCheckedChanged="Check_Clicked"/>
-                                   </div>
+                                   <asp:CheckBox id="checkbox2" runat="server" AutoPostBack="True" Text=" Search only basic foods and ingredients." TextAlign="Right" OnCheckedChanged="Check_Clicked" />
+                                </div>
                            </div>
                        </div>               
                     <div class="form-group pull-right">
@@ -231,22 +413,13 @@
                             
                          </asp:GridView>
                         <asp:Label ID="LabelPage" runat="server"></asp:Label>
-   <%--                     <asp:Repeater ID="repeaterPaging" runat="server">
-    <ItemTemplate>
-        <asp:LinkButton ID="pagingLinkButton" runat="server" 
-            Text='<%#Eval("Text") %>' 
-            CommandArgument='<%# Eval("Value") %>'
-            Enabled='<%# Eval("Enabled") %>' 
-            OnClick="linkButton_Click">
-        </asp:LinkButton>
-    </ItemTemplate>
-</asp:Repeater>--%>
                     </div>
                 </div>
             </div>
         </form>
         <hr style="color:aquamarine;height=2px"/>
     </div>
+  </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
 </body>
 </html>

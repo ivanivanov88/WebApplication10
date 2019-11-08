@@ -16,6 +16,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function goBack() {
+            window.history.back()
+        }
+</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css"/>
 <link rel="shortcut icon" href="~/walnut_small.ico" type ="image/x-icon" />
 <style>
@@ -29,13 +34,13 @@
 
 </head>
 <body style="height: 768px"> 
-    
+  <div id="wrapper" style="margin-left:auto;margin-right:20%;width:1580px;">
    <div class="row justify-content-center">
           
     <div class="col-auto">     
     <div class="container">        
   <h1 class="text-white align-content-center bg-primary">Nutritional value for <asp:Label ID ="Label152" runat ="server"></asp:Label>  </h1>
-
+ <a style="position:absolute;top:200px;" onclick="goBack()"  class="btn btn-primary btn-sm active pull-right " role="button" aria-pressed="true">Got back to main page.</a>
   <hr />
   <form>
   <div class="form-group">
@@ -1083,6 +1088,7 @@
     </div> 
     </div>  
     </div>   
+  </div>  
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.js"></script>

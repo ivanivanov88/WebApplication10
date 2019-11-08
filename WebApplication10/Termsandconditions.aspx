@@ -27,7 +27,7 @@
     </style>
 </head>
 <body>
-    
+    <div id="wrapper" style="margin-left:auto;margin-right:20%;width:1580px;">
     <form id="form1" runat="server">
             <div class="row justify-content-center">
          
@@ -103,7 +103,7 @@ are trademarks and service marks of consumestats.com. All rights reserved.</p></
   </div>
   <!-- Copyright -->
 
-</footer>
+</footer> </div>
 <!-- Footer -->
 </body>
 </html>

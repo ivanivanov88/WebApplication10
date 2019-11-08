@@ -87,6 +87,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Aboutus.aspx" />
+    <Content Include="appleRotation.css" />
+    <Content Include="AppleRotation\first_image.png" />
+    <Content Include="AppleRotation\tenth_image.png" />
+    <Content Include="AppleRotation\second_image.png" />
+    <Content Include="AppleRotation\third_image.png" />
+    <Content Include="AppleRotation\forth_image.png" />
+    <Content Include="AppleRotation\fifth_image.png" />
+    <Content Include="AppleRotation\sixth_image.png" />
+    <Content Include="AppleRotation\seventh_image.png" />
+    <Content Include="AppleRotation\eighth_image.png" />
+    <Content Include="AppleRotation\nineth_image.png" />
     <Content Include="bootstrap-4.3.1-dist\css\bootstrap-grid.css" />
     <Content Include="bootstrap-4.3.1-dist\css\bootstrap-grid.min.css" />
     <Content Include="bootstrap-4.3.1-dist\css\bootstrap-reboot.css" />
@@ -97,6 +108,9 @@
     <Content Include="bootstrap-4.3.1-dist\js\bootstrap.bundle.min.js" />
     <Content Include="bootstrap-4.3.1-dist\js\bootstrap.js" />
     <Content Include="bootstrap-4.3.1-dist\js\bootstrap.min.js" />
+    <Content Include="buttonClear.png" />
+    <Content Include="cancelbuttonsmall.png" />
+    <Content Include="CancleButton.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -106,10 +120,14 @@
     <Content Include="cookie.js" />
     <Content Include="cookie_note.css" />
     <Content Include="CustomStyles.css" />
+    <Content Include="FoodButtonSmaller2Adjusted.jpg" />
+    <Content Include="FoodCategoryButtonAdjusted.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Images\LogoAdjusted2.jpg" />
     <Content Include="Images\LogojpgEdit1.jpg" />
     <Content Include="Images\LogojpgSMALL.jpg" />
+    <Content Include="ImgRotating.js" />
+    <Content Include="Nutrient Button2Adjusted.jpg" />
     <Content Include="RadioButton.js" />
     <Content Include="multiply.js" />
     <Content Include="jquery-ui.css" />
@@ -131,6 +149,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="spritesheet.png" />
     <Content Include="Termsandconditions.aspx" />
     <Content Include="Sitemap.ashx" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
@@ -281,9 +300,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>39602</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44330/</IISUrl>
+          <IISUrl>https://localhost:44333/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>https://localhost:44330/</IISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44333/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

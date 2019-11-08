@@ -27,7 +27,8 @@
     </style>
 </head>
 <body>
-    
+    <div id="wrapper" style="margin-left:auto;margin-right:20%;width:1580px;">
+  
     <form id="form1" runat="server">
             <div class="row justify-content-center">
          
@@ -100,5 +101,7 @@ We use this information to make your experience with consumestats.com safer and 
 
 </footer>
 <!-- Footer -->
+</div>
 </body>
+
 </html>

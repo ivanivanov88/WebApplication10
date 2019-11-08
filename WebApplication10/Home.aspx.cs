@@ -1,132 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Web;
-//using System.Web.UI;
-//using System.Web.UI.WebControls;
-//using System.Configuration;
-//using System.Data;
-//using System.Data.SqlClient;
-//using System.Text;
-//using System.Web.UI.HtmlControls;
-//using Newtonsoft.Json;
-//using System.Web.Services;
-
-//namespace WebApplication10
-//{
-
-//    public partial class Home : System.Web.UI.Page
-//    {
-//        [WebMethod(EnableSession = true)]
-//        protected void Page_Load(object food, EventArgs a)
-//        {
-
-//            if(!IsPostBack)
-//            {
-//                checkbox2.Checked = false;
-//                checkboxhidden.Value = "Search3";
-//                Session["param"] = "";
-//                BindData();
-//            }
-
-//        }
-//        private void BindData()
-//        {
-//            string constr = ConfigurationManager.ConnectionStrings["connectionStr"].ConnectionString;
-
-//            using (SqlConnection con = new SqlConnection(constr))
-//            {
-//                string myquery = "Search6";
-//                SqlCommand cmd = new SqlCommand(myquery, con);
-//                cmd.CommandType = CommandType.StoredProcedure;
-//                con.Open();
-//                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-//                DataSet ds = new DataSet();
-//                sda.Fill(ds, "NutrDesc");
-//                ListBox1.DataSource = ds;
-//                ListBox1.DataTextField = "NutrDesc";
-//                ListBox1.DataValueField = "Nutr_No";
-//                ListBox1.Visible = true;
-//                ListBox1.DataBind();
-//                con.Close();
-//            }
-//        }
-//        protected void LinkButton1_Click(object sender, CommandEventArgs e)
-//        {
-
-//            Response.Redirect("ProductDetails.aspx?NDB_No=" + e.CommandArgument.ToString());
-
-//            Session["id"] = 1;
-//        }
-//        public string StringA { get; set; }
-
-//        public void Check_Clicked(object check, EventArgs c)
-//        {
-
-//            if (checkbox2.Checked)
-//            {
-//                StringA = "Search4";
-//                Session["param"] = "Search4";
-//            }
-//            else
-//            {
-//                StringA = "Search3";
-//                Session["param"] = "";
-
-//            }
-//            checkboxhidden.Value = StringA;         
-//        }
-//        protected void ListBox1_SelectedIndexChanged(object sender, System.EventArgs e)
-//        {
-//            string selecteditem = ListBox1.SelectedItem.Text;
-//            string connstr = ConfigurationManager.ConnectionStrings["connectionStr"].ConnectionString;
-//            using (SqlConnection conny = new SqlConnection(connstr))
-//            {
-//                SqlCommand cmd = new SqlCommand();
-//                cmd.Connection = conny;
-//                cmd.CommandText = checkboxhidden.Value;
-//                cmd.CommandType = CommandType.StoredProcedure;
-//                if (ListBox1.SelectedItem.Text.Trim() != "")
-//                {
-//                    SqlParameter param = new SqlParameter
-//                            ("@term2", ListBox1.SelectedItem.Text);
-//                    cmd.Parameters.Add(param);
-//                }
-//                conny.Open();
-//                SqlDataReader rdry = cmd.ExecuteReader();
-//            }
-//        }
-
-//        protected void BtnSearch_Click(object sender, EventArgs e)
-//        {
-//            if (inputLong_Desc.Value.Length == 0)
-//            {
-//                Response.Redirect("Home.aspx");
-//            }             
-//            string connectionStr = ConfigurationManager
-//                    .ConnectionStrings["connectionStr"].ConnectionString;
-//                using (SqlConnection con = new SqlConnection(connectionStr))
-//                {
-//                SqlCommand cmd = new SqlCommand();
-//                cmd.Connection = con;
-//                cmd.CommandText = checkboxhidden.Value;
-//                cmd.CommandType = CommandType.StoredProcedure;
-//               if (inputLong_Desc.Value.Trim() != "")
-//                    {
-//                        SqlParameter param = new SqlParameter
-//                            ("@term", inputLong_Desc.Value);
-//                        cmd.Parameters.Add(param);
-//                   }
-//                    con.Open();
-//                    SqlDataReader rdr = cmd.ExecuteReader();
-//                    gvSearchResults.DataSource = rdr;
-//                    gvSearchResults.DataBind();
-//                }
-
-//        }
-
-//    }
-// }
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -141,6 +13,7 @@ using System.Web.UI.HtmlControls;
 using Newtonsoft.Json;
 using System.Web.Services;
 using Microsoft.AspNet.FriendlyUrls;
+using System.Windows.Forms;
 
 namespace WebApplication10
 {
@@ -155,19 +28,10 @@ namespace WebApplication10
             {
                 checkbox2.Checked = false;
                 checkboxhidden.Value = "Search3";
-                Session["param"] = "";
-                //int totalRows = 0;
+                Session["param"] = "";           
                 BindData();
-                //DatabindRepeater(0, gvSearchResults.PageSize, totalRows);             
-                //var segments = Request.GetFriendlyUrlSegments();
-                //if (segments.Any())
-                //{
-                //    NDB_No.Text = "ID: " + segments[0];
-                //    Headline.Text = "Headline: " + segments[1];
-                //    Link.Text = Link.NavigateUrl = FriendlyUrl.Href("~/article", segments[0], segments[1]);
-                //}
-
-
+                OrderDiv.Visible = false;
+                CategoryDiv.Visible = false;
             }
         }
         private void BindData()
@@ -177,155 +41,31 @@ namespace WebApplication10
             using (SqlConnection con = new SqlConnection(constr))
             {
                 string myquery = "Search6";
+                string myquery2 = "ListBox2";
                 SqlCommand cmd = new SqlCommand(myquery, con);
+                SqlCommand cmd2 = new SqlCommand(myquery2, con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
+                cmd2.CommandType = CommandType.StoredProcedure;
+                con.Open();              
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                SqlDataAdapter sda2 = new SqlDataAdapter(cmd2);
                 DataSet ds = new DataSet();
+                DataSet ds2 = new DataSet();
                 sda.Fill(ds, "NutrDesc");
+                sda2.Fill(ds2, "FdGrp_Desc");
                 ListBox1.DataSource = ds;
                 ListBox1.DataTextField = "NutrDesc";
                 ListBox1.DataValueField = "Nutr_No";
                 ListBox1.Visible = true;
                 ListBox1.DataBind();
+                Listbox2.DataSource= ds2;
+                Listbox2.DataTextField = "FdGrp_Desc";
+                Listbox2.DataValueField = "FdGrp_Cd";
+                Listbox2.Visible = true;
+                Listbox2.DataBind();
                 con.Close();
             }
         }
-        //public static string RemapInternationalCharToAscii(char c)
-        //{
-        //    string s = c.ToString().ToLowerInvariant();
-        //    if ("àåáâäãåą".Contains(s))
-        //    {
-        //        return "a";
-        //    }
-        //    else if ("èéêëę".Contains(s))
-        //    {
-        //        return "e";
-        //    }
-        //    else if ("ìíîïı".Contains(s))
-        //    {
-        //        return "i";
-        //    }
-        //    else if ("òóôõöøőð".Contains(s))
-        //    {
-        //        return "o";
-        //    }
-        //    else if ("ùúûüŭů".Contains(s))
-        //    {
-        //        return "u";
-        //    }
-        //    else if ("çćčĉ".Contains(s))
-        //    {
-        //        return "c";
-        //    }
-        //    else if ("żźž".Contains(s))
-        //    {
-        //        return "z";
-        //    }
-        //    else if ("śşšŝ".Contains(s))
-        //    {
-        //        return "s";
-        //    }
-        //    else if ("ñń".Contains(s))
-        //    {
-        //        return "n";
-        //    }
-        //    else if ("ýÿ".Contains(s))
-        //    {
-        //        return "y";
-        //    }
-        //    else if ("ğĝ".Contains(s))
-        //    {
-        //        return "g";
-        //    }
-        //    else if (c == 'ř')
-        //    {
-        //        return "r";
-        //    }
-        //    else if (c == 'ł')
-        //    {
-        //        return "l";
-        //    }
-        //    else if (c == 'đ')
-        //    {
-        //        return "d";
-        //    }
-        //    else if (c == 'ß')
-        //    {
-        //        return "ss";
-        //    }
-        //    else if (c == 'Þ')
-        //    {
-        //        return "th";
-        //    }
-        //    else if (c == 'ĥ')
-        //    {
-        //        return "h";
-        //    }
-        //    else if (c == 'ĵ')
-        //    {
-        //        return "j";
-        //    }
-        //    else
-        //    {
-        //        return "";
-        //    }
-        //}
-        //public static string URLFriendly(string title)
-        //{
-        //    if (title == null) return "";
-
-        //    const int maxlen = 80;
-        //    int len = title.Length;
-        //    bool prevdash = false;
-        //    var sb = new StringBuilder(len);
-        //    char c;
-
-        //    for (int i = 0; i < len; i++)
-        //    {
-        //        c = title[i];
-        //        if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
-        //        {
-        //            sb.Append(c);
-        //            prevdash = false;
-        //        }
-        //        else if (c >= 'A' && c <= 'Z')
-        //        {
-        //            // tricky way to convert to lowercase
-        //            sb.Append((char)(c | 32));
-        //            prevdash = false;
-        //        }
-        //        else if (c == ' ' || c == ',' || c == '.' || c == '/' ||
-        //            c == '\\' || c == '-' || c == '_' || c == '=')
-        //        {
-        //            if (!prevdash && sb.Length > 0)
-        //            {
-        //                sb.Append('-');
-        //                prevdash = true;
-        //            }
-        //        }
-        //        else if ((int)c >= 128)
-        //        {
-        //            int prevlen = sb.Length;
-        //            sb.Append(RemapInternationalCharToAscii(c));
-        //            if (prevlen != sb.Length) prevdash = false;
-        //        }
-        //        if (i == maxlen) break;
-        //    }
-
-        //    if (prevdash)
-        //        return sb.ToString().Substring(0, sb.Length - 1);
-        //    else
-        //        return sb.ToString();
-        //}
-
-        //protected void LinkButton1_Click(object sender, CommandEventArgs e)
-        //{
-
-        //    Response.Redirect("ProductDetails.aspx?NDB_No=" + e.CommandArgument.ToString());
-            
-        //    Session["id"] = 1;
-        //}
         public string StringA { get; set; }
 
         public void Check_Clicked(object check, EventArgs c)
@@ -338,6 +78,7 @@ namespace WebApplication10
             else if (checkbox2.Checked && ListBox1.GetSelectedIndices().Count() == 1)
             {
                 StringA = "SelectandOrderByNutrient";
+                Session["param"] = "";
             }
             else
             {
@@ -349,65 +90,113 @@ namespace WebApplication10
         }
         protected void ListBox1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            string selecteditem = ListBox1.SelectedItem.Text;
-            string connstr = ConfigurationManager.ConnectionStrings["connectionStr"].ConnectionString;
-            using (SqlConnection conny = new SqlConnection(connstr))
-            {
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = conny;
-                cmd.CommandText = "SelectandOrderByNutrient";
-                cmd.CommandType = CommandType.StoredProcedure;
-                if (ListBox1.SelectedItem.Text.Trim() != "")
-                {
-                    SqlParameter param = new SqlParameter
-                            ("@termnut", ListBox1.SelectedItem.Text);
-                    cmd.Parameters.Add(param);
-                    SqlParameter param2 = new SqlParameter
-                        ("@termnuty", inputLong_Desc.Value);
-                    cmd.Parameters.Add(param2);
-                }
-                conny.Open();
-                var da = new SqlDataAdapter(cmd);
-                var ds = new DataSet();
-                da.Fill(ds);
-               
-                if (ds.Tables.Count > 0)
-                {
-                    //gvSearchResults.PageIndex = e.NewPageIndex;
-                    gvSearchResults.DataSource = ds.Tables[0];
-                    gvSearchResults.DataBind();
-                }
-            }
-        }
-        protected void ClearFilter(object sender, EventArgs e)
+
+            TextBoxList.Text = ListBox1.SelectedItem.Text;
+            OrderDiv.Visible = true;
+        }       
+        protected void Dropdown_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            TextBox2.Text = Listbox2.SelectedItem.Text;
+            CategoryDiv.Visible = true;
+        }       
+            protected void ClearFilter(object sender, EventArgs e)
         {
             ListBox1.SelectedIndex = -1;
+            TextBoxList.Text = string.Empty;
+            OrderDiv.Visible = false;
+        }
+        protected void ClearFilter2(object sender, EventArgs e)
+        {
+            Listbox2.SelectedIndex = -1;
+            TextBox2.Text = string.Empty;
+            CategoryDiv.Visible = false;
         }
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
-
-
-            if (inputLong_Desc.Value.Length == 0)
+           if(inputLong_Desc.Value.Length == 0 && checkbox2.Checked == false && Listbox2.SelectedIndex <= 0 && ListBox1.GetSelectedIndices().Count() == 0)
             {
-                Response.Redirect("Home.aspx");
+                 Response.Redirect("Home.aspx");
             }
-            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false)
+           else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == false && Listbox2.SelectedIndex >= 1 && ListBox1.GetSelectedIndices().Count() == 1)         
+           {
+                checkboxhidden.Value = "SelectCategoryWithListboxWOLong_desc";
+           }               
+           else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == false && Listbox2.SelectedIndex >= 1 && ListBox1.GetSelectedIndices().Count() == 0)
+           {
+                checkboxhidden.Value = "[dbo].[SelectCategoryWOAnything]";
+           }                            
+           else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && Listbox2.SelectedIndex >= 1 && ListBox1.GetSelectedIndices().Count() == 1)
+            {
+                
+                checkboxhidden.Value = "SelectCategoryWithEverythingWoLong_desc";
+            }
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && Listbox2.SelectedIndex >= 1 && ListBox1.GetSelectedIndices().Count() == 0)
+            {
+                 checkboxhidden.Value = "SelectCategoryWithCheckboxWoLong_descAndListbox";
+            }
+            
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && ListBox1.GetSelectedIndices().Count() == 1 && Listbox2.SelectedIndex >= 1 )
+            {
+               
+                    checkboxhidden.Value = "SelectCategoryWoLong_descAndListbox2";
+             }
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && ListBox1.GetSelectedIndices().Count() == 1 && Listbox2.SelectedIndex <= 0)
+            {
+                    checkboxhidden.Value = "SelectCategoryWoLong_descAndListbox2";
+            }
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && Listbox2.SelectedIndex <= 0 && ListBox1.GetSelectedIndices().Count() == 1)
+            {
+               
+                    checkboxhidden.Value = "SelectCategoryWoLong_descAndListbox2";
+            }
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && Listbox2.SelectedIndex <= 0 && ListBox1.GetSelectedIndices().Count() == 0)
+            {
+                    checkboxhidden.Value = "SelectOnlyWithCheckbox";
+            }
+            
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false && Listbox2.SelectedIndex >= 1 && inputLong_Desc.Value.Length == 0)
+            {
+               
+                    checkboxhidden.Value = "SelectCategoryWithListbox";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false && Listbox2.SelectedIndex >= 1 && inputLong_Desc.Value.Length >= 1)
+            {
+                  checkboxhidden.Value = "SelectCategoryWithoutCheckbox";
+            }
+            
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == true && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex >= 1)
+            {              
+              checkboxhidden.Value = "SelectCategoryWithEverything";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == true && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex <= 0)
+            {
+               checkboxhidden.Value = "SelectandOrderByNutrient2";
+            }
+            
+            else if (ListBox1.GetSelectedIndices().Count() == 0 && checkbox2.Checked == true && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex >= 1)
+            {             
+                    checkboxhidden.Value = "SelectCategoryWithCheckbox";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 0 && checkbox2.Checked == true && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex <= 0)
+            { 
+                    checkboxhidden.Value = "Search4";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 0 && checkbox2.Checked == false && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex >= 1)
+            {
+                checkboxhidden.Value = "SelectCategoryWithLong_DescOnly"; 
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false && inputLong_Desc.Value.Length == 0 && Listbox2.SelectedIndex <= 0)
+            {
+                checkboxhidden.Value = "SelectandOrderByNutrientWoLong_Desc";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex <= 0)
             {
                 checkboxhidden.Value = "SelectandOrderByNutrient";
-            }
-            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == true)
-            {
-                checkboxhidden.Value = "SelectandOrderByNutrient2";
-            }
-            else if (ListBox1.GetSelectedIndices().Count() == 0 && checkbox2.Checked == true)
-            {
-                checkboxhidden.Value = "Search4";
             }
             else
             {
                 checkboxhidden.Value = "Search5";
             }
-
             string connectionStr = ConfigurationManager
                     .ConnectionStrings["connectionStr"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionStr))
@@ -416,26 +205,129 @@ namespace WebApplication10
                 cmd.Connection = con;
                 cmd.CommandText = checkboxhidden.Value;
                 cmd.CommandType = CommandType.StoredProcedure;
-                if (inputLong_Desc.Value.Trim() != "")
-                {
-                    if (checkboxhidden.Value.Length >= 11)
+                 if (checkboxhidden.Value == "SelectandOrderByNutrient2" || checkboxhidden.Value == "SelectandOrderByNutrient")
                     {
                         SqlParameter param = new SqlParameter
-                            ("@termnuty", inputLong_Desc.Value);
+                       ("@termnuty", inputLong_Desc.Value);
+                        cmd.Parameters.Add(param);
+                        SqlParameter param2 = new SqlParameter
+                       ("@termnut", ListBox1.SelectedItem.Text);
+                        cmd.Parameters.Add(param2);
+                    }
+                    else if(checkboxhidden.Value == "SelectCategoryWithListbox" )
+                    {
+                        SqlParameter param = new SqlParameter
+                        ("@termnut1", inputLong_Desc.Value);
+                        cmd.Parameters.Add(param);
+                        SqlParameter param2 = new SqlParameter
+                        ("@termnut3", ListBox1.SelectedItem.Text);
+                        cmd.Parameters.Add(param2);
+                        SqlParameter param3 = new SqlParameter
+                        ("@termnut2", Listbox2.SelectedItem.Text);
+                        cmd.Parameters.Add(param3);
+                    }
+                    else if(checkboxhidden.Value == "SelectCategoryWithCheckbox")
+                    {
+                         SqlParameter param = new SqlParameter
+                         ("@term", inputLong_Desc.Value);
+                         cmd.Parameters.Add(param);
+                         SqlParameter param2 = new SqlParameter
+                         ("@term2", Listbox2.SelectedItem.Text);
+                         cmd.Parameters.Add(param2);
+                    }
+                    else if (checkboxhidden.Value == "SelectCategoryWithEverything")
+                    {
+                        SqlParameter param = new SqlParameter
+                         ("@termnut1", inputLong_Desc.Value);
+                         cmd.Parameters.Add(param);
+                         SqlParameter param2 = new SqlParameter
+                          ("@termnut2", ListBox1.SelectedItem.Text);
+                        cmd.Parameters.Add(param2);
+                        SqlParameter param3 = new SqlParameter
+                         ("@termnut3", Listbox2.SelectedItem.Text);
+                        cmd.Parameters.Add(param3);
+                    }
+                    else if(checkboxhidden.Value == "SelectCategoryWithListboxWOLong_desc")
+                    {
+                        SqlParameter param = new SqlParameter
+                        ("@termnut1", Listbox2.SelectedItem.Text);
+                        cmd.Parameters.Add(param);
+                        SqlParameter param2 = new SqlParameter
+                          ("@termnut2", ListBox1.SelectedItem.Text);
+                        cmd.Parameters.Add(param2);
+                    }
+                else if (checkboxhidden.Value == "SelectCategoryWithoutCheckbox")
+                {
+                    SqlParameter param = new SqlParameter
+                     ("@termnut1", inputLong_Desc.Value);
+                    cmd.Parameters.Add(param);
+                    SqlParameter param2 = new SqlParameter
+                      ("@termnut2", ListBox1.SelectedItem.Text);
+                    cmd.Parameters.Add(param2);
+                    SqlParameter param3 = new SqlParameter
+                     ("@termnut3", Listbox2.SelectedItem.Text);
+                    cmd.Parameters.Add(param3);
+                }
+                else if (checkboxhidden.Value == "[dbo].[SelectCategoryWOAnything]")
+                    {
+                        
+                        SqlParameter param = new SqlParameter("@termnut", Listbox2.SelectedItem.Text);
+                        cmd.Parameters.Add(param);
+                      
+
+                    }
+                else if (checkboxhidden.Value == "SelectCategoryWoLong_descAndListbox2")
+                {
+
+                    SqlParameter param = new SqlParameter("@termnut1", ListBox1.SelectedItem.Text);
+                    cmd.Parameters.Add(param);
+
+
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWithEverythingWoLong_desc")
+                    {
+                        SqlParameter param = new SqlParameter
+                         ("@termnut1", ListBox1.SelectedItem.Text);
 
                         cmd.Parameters.Add(param);
                         SqlParameter param2 = new SqlParameter
-                          ("@termnut", ListBox1.SelectedItem.Text);
+                          ("@termnut2", Listbox2.SelectedItem.Text);
                         cmd.Parameters.Add(param2);
                     }
-                    else
+                else if (checkboxhidden.Value == "SelectCategoryWithLong_DescOnly")
+                {
+                    SqlParameter param = new SqlParameter
+                     ("@termnut1", inputLong_Desc.Value);
+
+                    cmd.Parameters.Add(param);
+                    SqlParameter param2 = new SqlParameter
+                      ("@termnut2", Listbox2.SelectedItem.Text);
+                    cmd.Parameters.Add(param2);
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWithCheckboxWoLong_descAndListbox")
+                    {
+                      SqlParameter param = new SqlParameter
+                     ("@termnut1", Listbox2.SelectedItem.Text);
+
+                        cmd.Parameters.Add(param);
+                    }
+                else if (checkboxhidden.Value == "SelectandOrderByNutrientWoLong_Desc")
+                {
+                    SqlParameter param = new SqlParameter
+                   ("@termnut", ListBox1.SelectedItem.Text);
+
+                    cmd.Parameters.Add(param);
+                }
+                else if (checkboxhidden.Value == "SelectOnlyWithCheckbox")
+                {                
+                }
+                else
                     {
                         SqlParameter param = new SqlParameter
                         ("@term", inputLong_Desc.Value);
 
                         cmd.Parameters.Add(param);
-                    }
-                }
+                    }               
                 con.Open();
                 var da = new SqlDataAdapter(cmd);
                 var ds = new DataSet();
@@ -446,7 +338,7 @@ namespace WebApplication10
                     gvSearchResults.Columns[1].Visible = true;
                     gvSearchResults.Columns[2].Visible = true;
                 }
-                else
+                else if (ListBox1.GetSelectedIndices().Count() == 0)
                 {
                     gvSearchResults.Columns[1].Visible = false;
                     gvSearchResults.Columns[2].Visible = false;
@@ -463,27 +355,90 @@ namespace WebApplication10
         }
         protected void SubmitAppraisalGrid_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            if (inputLong_Desc.Value.Length == 0)
+            if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == false && Listbox2.SelectedIndex >= 0 && ListBox1.GetSelectedIndices().Count() == 0)
             {
                 Response.Redirect("Home.aspx");
             }
-            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false)
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == false && Listbox2.SelectedIndex >= 1 && ListBox1.GetSelectedIndices().Count() == 1)
             {
-                checkboxhidden.Value = "SelectandOrderByNutrient";
+                checkboxhidden.Value = "SelectCategoryWithListboxWOLong_desc";
             }
-            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == true)
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == false && Listbox2.SelectedIndex >= 1 && ListBox1.GetSelectedIndices().Count() == 0)
+            {
+                checkboxhidden.Value = "SelectCategoryWOAnything";
+            }
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && Listbox2.SelectedIndex >= 1 && ListBox1.GetSelectedIndices().Count() == 1)
+            {
+
+                checkboxhidden.Value = "SelectCategoryWithEverythingWoLong_desc";
+            }
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && Listbox2.SelectedIndex >= 1 && ListBox1.GetSelectedIndices().Count() == 0)
+            {
+                checkboxhidden.Value = "SelectCategoryWithCheckboxWoLong_descAndListbox";
+            }
+
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && ListBox1.GetSelectedIndices().Count() == 1 && Listbox2.SelectedIndex >= 1)
+            {
+
+                checkboxhidden.Value = "SelectCategoryWoLong_descAndListbox2";
+            }
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && ListBox1.GetSelectedIndices().Count() == 1 && Listbox2.SelectedIndex <= 0)
+            {
+                checkboxhidden.Value = "SelectCategoryWoLong_descAndListbox2";
+            }
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && Listbox2.SelectedIndex <= 0 && ListBox1.GetSelectedIndices().Count() == 1)
+            {
+
+                checkboxhidden.Value = "SelectCategoryWoLong_descAndListbox2";
+            }
+            else if (inputLong_Desc.Value.Length == 0 && checkbox2.Checked == true && Listbox2.SelectedIndex <= 0 && ListBox1.GetSelectedIndices().Count() == 0)
+            {
+                checkboxhidden.Value = "SelectOnlyWithCheckbox";
+            }
+
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false && Listbox2.SelectedIndex >= 1 && inputLong_Desc.Value.Length == 0)
+            {
+
+                checkboxhidden.Value = "SelectCategoryWithListbox";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false && Listbox2.SelectedIndex >= 1 && inputLong_Desc.Value.Length >= 1)
+            {
+                checkboxhidden.Value = "SelectCategoryWithoutCheckbox";
+            }
+
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == true && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex >= 1)
+            {
+                checkboxhidden.Value = "SelectCategoryWithEverything";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == true && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex <= 0)
             {
                 checkboxhidden.Value = "SelectandOrderByNutrient2";
             }
-            else if (ListBox1.GetSelectedIndices().Count() == 0 && checkbox2.Checked == true)
+
+            else if (ListBox1.GetSelectedIndices().Count() == 0 && checkbox2.Checked == true && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex >= 1)
+            {
+                checkboxhidden.Value = "SelectCategoryWithCheckbox";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 0 && checkbox2.Checked == true && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex <= 0)
             {
                 checkboxhidden.Value = "Search4";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 0 && checkbox2.Checked == false && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex >= 1)
+            {
+                checkboxhidden.Value = "SelectCategoryWithLong_DescOnly";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false && inputLong_Desc.Value.Length == 0 && Listbox2.SelectedIndex <= 0)
+            {
+                checkboxhidden.Value = "SelectandOrderByNutrientWoLong_Desc";
+            }
+            else if (ListBox1.GetSelectedIndices().Count() == 1 && checkbox2.Checked == false && inputLong_Desc.Value.Length >= 1 && Listbox2.SelectedIndex <= 0)
+            {
+                checkboxhidden.Value = "SelectandOrderByNutrient";
             }
             else
             {
                 checkboxhidden.Value = "Search5";
             }
-
             string connectionStr = ConfigurationManager
                     .ConnectionStrings["connectionStr"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionStr))
@@ -492,25 +447,128 @@ namespace WebApplication10
                 cmd.Connection = con;
                 cmd.CommandText = checkboxhidden.Value;
                 cmd.CommandType = CommandType.StoredProcedure;
-                if (inputLong_Desc.Value.Trim() != "")
+                if (checkboxhidden.Value == "SelectandOrderByNutrient2" || checkboxhidden.Value == "SelectandOrderByNutrient")
                 {
-                    if (checkboxhidden.Value.Length >= 11)
-                    {
-                        SqlParameter param = new SqlParameter
-                            ("@termnuty", inputLong_Desc.Value);
+                    SqlParameter param = new SqlParameter
+                   ("@termnuty", inputLong_Desc.Value);
+                    cmd.Parameters.Add(param);
+                    SqlParameter param2 = new SqlParameter
+                   ("@termnut", ListBox1.SelectedItem.Text);
+                    cmd.Parameters.Add(param2);
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWithListbox")
+                {
+                    SqlParameter param = new SqlParameter
+                    ("@termnut1", inputLong_Desc.Value);
+                    cmd.Parameters.Add(param);
+                    SqlParameter param2 = new SqlParameter
+                    ("@termnut3", ListBox1.SelectedItem.Text);
+                    cmd.Parameters.Add(param2);
+                    SqlParameter param3 = new SqlParameter
+                    ("@termnut2", Listbox2.SelectedItem.Text);
+                    cmd.Parameters.Add(param3);
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWithCheckbox")
+                {
+                    SqlParameter param = new SqlParameter
+                    ("@term", inputLong_Desc.Value);
+                    cmd.Parameters.Add(param);
+                    SqlParameter param2 = new SqlParameter
+                    ("@term2", Listbox2.SelectedItem.Text);
+                    cmd.Parameters.Add(param2);
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWithEverything")
+                {
+                    SqlParameter param = new SqlParameter
+                     ("@termnut1", inputLong_Desc.Value);
+                    cmd.Parameters.Add(param);
+                    SqlParameter param2 = new SqlParameter
+                     ("@termnut2", ListBox1.SelectedItem.Text);
+                    cmd.Parameters.Add(param2);
+                    SqlParameter param3 = new SqlParameter
+                     ("@termnut3", Listbox2.SelectedItem.Text);
+                    cmd.Parameters.Add(param3);
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWithListboxWOLong_desc")
+                {
+                    SqlParameter param = new SqlParameter
+                    ("@termnut1", Listbox2.SelectedItem.Text);
+                    cmd.Parameters.Add(param);
+                    SqlParameter param2 = new SqlParameter
+                      ("@termnut2", ListBox1.SelectedItem.Text);
+                    cmd.Parameters.Add(param2);
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWithoutCheckbox")
+                {
+                    SqlParameter param = new SqlParameter
+                     ("@termnut1", inputLong_Desc.Value);
+                    cmd.Parameters.Add(param);
+                    SqlParameter param2 = new SqlParameter
+                      ("@termnut2", ListBox1.SelectedItem.Text);
+                    cmd.Parameters.Add(param2);
+                    SqlParameter param3 = new SqlParameter
+                     ("@termnut3", Listbox2.SelectedItem.Text);
+                    cmd.Parameters.Add(param3);
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWOAnything")
+                {
 
-                        cmd.Parameters.Add(param);
-                        SqlParameter param2 = new SqlParameter
-                          ("@termnut", ListBox1.SelectedItem.Text);
-                        cmd.Parameters.Add(param2);
-                    }
-                    else
-                    {
-                        SqlParameter param = new SqlParameter
-                        ("@term", inputLong_Desc.Value);
+                    SqlParameter param = new SqlParameter("@termnut", Listbox2.SelectedItem.Text);
+                    cmd.Parameters.Add(param);
 
-                        cmd.Parameters.Add(param);
-                    }
+
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWoLong_descAndListbox2")
+                {
+
+                    SqlParameter param = new SqlParameter("@termnut1", ListBox1.SelectedItem.Text);
+                    cmd.Parameters.Add(param);
+                    
+
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWithEverythingWoLong_desc")
+                {
+                    SqlParameter param = new SqlParameter
+                     ("@termnut1", ListBox1.SelectedItem.Text);
+
+                    cmd.Parameters.Add(param);
+                    SqlParameter param2 = new SqlParameter
+                      ("@termnut2", Listbox2.SelectedItem.Text);
+                    cmd.Parameters.Add(param2);
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWithLong_DescOnly")
+                {
+                    SqlParameter param = new SqlParameter
+                     ("@termnut1", inputLong_Desc.Value);
+
+                    cmd.Parameters.Add(param);
+                    SqlParameter param2 = new SqlParameter
+                      ("@termnut2", Listbox2.SelectedItem.Text);
+                    cmd.Parameters.Add(param2);
+                }
+                else if (checkboxhidden.Value == "SelectCategoryWithCheckboxWoLong_descAndListbox")
+                {
+                    SqlParameter param = new SqlParameter
+                   ("@termnut1", Listbox2.SelectedItem.Text);
+
+                    cmd.Parameters.Add(param);
+                }
+                else if (checkboxhidden.Value == "SelectandOrderByNutrientWoLong_Desc")
+                {
+                    SqlParameter param = new SqlParameter
+                   ("@termnut", ListBox1.SelectedItem.Text);
+
+                    cmd.Parameters.Add(param);
+                }
+                else if (checkboxhidden.Value == "SelectOnlyWithCheckbox")
+                {
+                }
+                else
+                {
+                    SqlParameter param = new SqlParameter
+                    ("@term", inputLong_Desc.Value);
+
+                    cmd.Parameters.Add(param);
                 }
                 con.Open();
                 var da = new SqlDataAdapter(cmd);
@@ -522,7 +580,7 @@ namespace WebApplication10
                     gvSearchResults.Columns[1].Visible = true;
                     gvSearchResults.Columns[2].Visible = true;
                 }
-                else
+                else if (ListBox1.GetSelectedIndices().Count() == 0)
                 {
                     gvSearchResults.Columns[1].Visible = false;
                     gvSearchResults.Columns[2].Visible = false;
@@ -535,45 +593,16 @@ namespace WebApplication10
                     gvSearchResults.DataBind();
                 }
 
+
             }
-            
+
         }
         protected void GridView1_PreRender(object apple, EventArgs l)
         {
             LabelPage.Text = "Displaying Page " + (gvSearchResults.PageIndex + 1).ToString()
                 + " of " + GridView1.PageCount.ToString();
         }
-        //protected void linkButton_Click(object sender, EventArgs e)
-        //{
-        //    int totalRows = 0;
-        //    int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
-        //    pageIndex -= 1;
-        //    gvSearchResults.PageIndex = pageIndex;
-        //    gvSearchResults.DataSource = ????????????
-        //    gvSearchResults(pageIndex, gvSearchResults.PageSize, out totalRows);
-        //    gvSearchResults.DataBind();
-        //    DatabindRepeater(pageIndex, gvSearchResults.PageSize, totalRows);
-        //}
-        //private void DatabindRepeater(int pageIndex, int pageSize, int totalRows)
-        //{
-        //    int totalPages = totalRows / pageSize;
-        //    if ((totalRows % pageSize) != 0)
-        //    {
-        //        totalPages += 1;
-        //    }
-
-        //    List<ListItem> pages = new List<ListItem>();
-        //    if (totalPages > 1)
-        //    {
-        //        for (int i = 1; i <= totalPages; i++)
-        //        {
-        //            pages.Add(new ListItem(i.ToString(), i.ToString(), i != (pageIndex + 1)));
-        //        }
-        //    }
-        //    Repeater Rpt1 = (Repeater)Master.FindControl("repeaterPaging");
-        //    Rpt1.DataSource = pages;
-        //    Rpt1.DataBind();
-        //}
+    
 
     }
 }

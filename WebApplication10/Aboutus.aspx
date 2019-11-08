@@ -59,7 +59,7 @@
     </style>
 </head>
 <body>
-           
+           <div id="wrapper" style="margin-left:auto;margin-right:20%;width:1580px;">
         <div class ="container  justify-content-center " style =" position: relative; left:370px">
             <div class="row">
          <a href="Home.aspx" class="btn btn-primary btn-sm active pull-right " role="button" aria-pressed="true">Got back to main page.</a>
@@ -110,5 +110,6 @@
   <!-- Copyright -->
 
 </footer>
+               </div>
 </body>
 </html>
